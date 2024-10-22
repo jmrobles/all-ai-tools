@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "ai-tool-rag"
+version = "0.1.0"
+description = "AI Tool RAG System for information retrieval about AI tools"
+authors = ["Chema <chema@montevive.ai>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.3"
+llama-index = "^0.11.19"
+sqlalchemy = "^2.0.36"
+psycopg2-binary = "^2.9.5"
+pgvector = "^0.2.5"
+openai = "^1.52.0"
+python-dotenv = "^1.0.1"
+uvicorn = "^0.32.0"
+pydantic-settings = "^2.6.0"
+llama-index-vector-stores-postgres = "^0.2.6"
+llama-index-embeddings-openai = "^0.2.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.3.3"
+black = "^23.3.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
