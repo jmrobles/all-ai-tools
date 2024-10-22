@@ -1,20 +1,7 @@
-from sqlalchemy import Column, Integer, Text, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from pgvector.sqlalchemy import Vector
-from app.core.config import settings
+from sqlalchemy import Column, Integer, String
+from app.db.base import Base  
 
-engine = create_engine(settings.DATABASE_URL)
-Session = sessionmaker(bind=engine)
-Base = declarative_base()
+class DataAITools(Base):
+    __tablename__ = "data_ai_tools"
 
-# Define PostgreSQL model
-class ToolVector(Base):
-    __tablename__ = 'tool_vectors'
-
-    id = Column(Integer, primary_key=True)
-    content = Column(Text)
-    metadata = Column(Text)
-    vector = Column(Vector(1536))
-
-Base.metadata.create_all(engine)
+    id = Column(Integer, primary_key=True, index=True)

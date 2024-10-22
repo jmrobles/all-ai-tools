@@ -18,6 +18,7 @@ help:
 	@echo "  format     - Format code using isort and black"
 	@echo "  test       - Run tests"
 	@echo "  clean      - Remove cached files"
+	@echo "  docker-build - Build the Docker image"
 
 # Install dependencies
 install:
@@ -61,6 +62,18 @@ clean:
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
 	find . -type d -name ".mypy_cache" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
+
+docker-build:
+	@echo "Building the Docker image..."
+	docker build -t registry.digitalilusion.com/montevive/ai-tool-rag:latest .
+push-image:
+	@echo "Pushing the Docker image..."
+	docker push registry.digitalilusion.com/montevive/ai-tool-rag:latest
+
+rollout:
+	kubectl -n montevive rollout restart deployment ai-tool-rag
+
+deploy: docker-build push-image rollout
 
 # Default target
 .DEFAULT_GOAL := help

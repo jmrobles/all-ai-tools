@@ -1,4 +1,5 @@
 from typing import List
+from sqlalchemy.exc import OperationalError
 from app.schemas.tool import ToolCreate, Tool
 from llama_index.core import Document, VectorStoreIndex, StorageContext
 from llama_index.vector_stores.postgres import PGVectorStore
@@ -13,11 +14,27 @@ async def index_tool(tool: ToolCreate) -> Tool:
     engine = create_engine(url)
 
     # Check if the tool was previously indexed
-    with engine.connect() as connection:
-        result = connection.execute(text("SELECT COUNT(*) FROM data_ai_tools WHERE metadata_->>'hash' = :hash"), {"hash": tool.hash})
-        if result.scalar() > 0:
-            print(f"Tool with hash {tool.hash} already indexed. Skipping.")
-            return Tool(id=tool.hash, **tool.model_dump())
+    try:
+        with engine.connect() as connection:
+            result = connection.execute(
+                text("SELECT COUNT(*) FROM data_ai_tools WHERE metadata_->>'hash' = :hash"), {"hash": tool.hash})
+            
+            if result.scalar() > 0:
+                print(f"Tool with hash {tool.hash} already indexed. Skipping.")
+                return Tool(id=tool.hash, **tool.model_dump())
+    except OperationalError as e:
+        # Check if the error is due to the missing table.
+        if 'relation "data_ai_tools" does not exist' in str(e):
+            print(f"Table 'data_ai_tools' does not exist. Skipping indexing for tool with hash {tool.hash}.")
+            # Handle the situation when the table does not exist, e.g., returning None or another logic.
+            return None
+        else:
+            # Raise the exception if it is due to other reasons.
+            print('damn it')
+            return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
 
     vector_store = PGVectorStore.from_params(
         database=url.database,
