@@ -12,6 +12,7 @@ help:
 	@echo "Available commands:"
 	@echo "  install    - Install project dependencies"
 	@echo "  run        - Run the FastAPI app in development mode"
+	@echo "  run-bot    - Run the Telegram bot locally"
 	@echo "  db-up      - Start the PostgreSQL database"
 	@echo "  db-down    - Stop the PostgreSQL database"
 	@echo "  lint       - Run linters (isort, black)"
@@ -73,7 +74,15 @@ push-image:
 rollout:
 	kubectl -n montevive rollout restart deployment ai-tool-rag
 
+rollout-bot:
+	kubectl -n montevive rollout restart deployment ai-tools-telegram-bot
+
 deploy: docker-build push-image rollout
 
+run-bot:
+	@echo "Running the Telegram bot locally..."
+	$(PYTHON) -m app.telegram.bot
+
+#
 # Default target
 .DEFAULT_GOAL := help

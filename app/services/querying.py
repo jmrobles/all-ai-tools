@@ -1,4 +1,5 @@
 from typing import List
+import json
 from app.schemas.tool import Tool, ToolCreate
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.vector_stores.postgres import PGVectorStore
@@ -56,3 +57,8 @@ async def process_query(query: str) -> List[Tool]:
         tools.append(tool)
     
     return tools
+
+async def process_query_json(query: str) -> str:
+    result = await process_query(query)
+    dumped = [tool.model_dump_json() for tool in result]
+    return json.dumps(dumped)

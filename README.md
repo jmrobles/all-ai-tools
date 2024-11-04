@@ -1,6 +1,7 @@
 # AI Tool RAG System
 
-AI Tool is a Retrieval-Augmented Generation (RAG) system designed to provide information about AI tools based on user queries. It uses LlamaIndex for efficient indexing and retrieval, and pgvector for vector storage. The system offers a FastAPI-based API for document indexing and query processing.
+AI Tool is a Retrieval-Augmented Generation (RAG) system designed to provide information about AI tools based on user queries. It uses LlamaIndex for efficient indexing and retrieval, and pgvector for vector storage. The system offers a FastAPI-based API for document indexing and query processing, as well as a Telegram chatbot interface with Nvidia NeMo Guardrails for enhanced bot behavior.
+
 
 ## Features
 
@@ -15,7 +16,8 @@ AI Tool is a Retrieval-Augmented Generation (RAG) system designed to provide inf
 - PostgreSQL with pgvector extension
 - Poetry
 - OpenAI API key
-
+- Telegram Bot API token
+- Nvidia NeMo Guardrails library
 
 ## Installation
 
@@ -52,6 +54,10 @@ Edit the .env file with your database credentials, OpenAI API key, and other nec
 OPENAI_API_KEY=your_openai_api_key
 DATABASE_URL=postgresql://username:password@localhost/dbname
 API_TOKEN=your_api_token_here
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+NEMO_GUARDRAILS_CONFIG_PATH=nemo_guardrails_config_path
+USE_WEBHOOK=false
+WEBHOOK_URL=webhook_url
 ```
 
 ## Usage
@@ -63,6 +69,13 @@ Before running any commands, activate the Poetry environment:
 poetry shell
 ```
 
+## Starting the Telegram bot service
+
+Run the Telegram bot:
+
+```bash
+make run-bot
+```
 ## Staring the API
 
 Run the FastAPI server:
@@ -136,6 +149,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - FastAPI
 - OpenAI
 - Poetry
+
 ## Support
 
 If you encounter any issues or have questions, please file an issue on the GitHub repository.

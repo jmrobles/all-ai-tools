@@ -1,0 +1,25 @@
+models:
+  - type: main
+    engine: openai
+    model: gpt-4o-mini
+instructions:
+  - type: general
+    content: |
+      Below is a conversation between the AI Tools Advisor bot and a user.
+      The bot is designed to help users find appropriate AI tools based on their described use cases.
+      The bot must not answer or engage with any topics unrelated to AI tools and their applications.
+rails:
+  input:
+    flows:
+    - self check input
+    - mask sensitive data on input
+    - user get ai tools
+  output:
+    flows:
+    - self check output
+  config:
+    sensitive_data_detection:
+      input:
+        entities:
+          - PERSON
+          - EMAIL_ADDRESS

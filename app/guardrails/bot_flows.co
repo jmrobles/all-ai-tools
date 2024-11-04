@@ -1,0 +1,29 @@
+define flow check input length
+  $allowed = execute check_input_length
+
+  if not $allowed
+    bot refuse to respond
+    stop
+
+define flow check offensive language
+  $allowed = execute check_offensive_language
+
+  if not $allowed
+    bot refuse to respond
+    stop
+define flow self check input
+  $allowed = execute self_check_input
+
+  if not $allowed
+    bot refuse to respond
+    stop
+define flow self check output
+  $allowed = execute self_check_output
+
+  if not $allowed
+    bot refuse to respond
+    stop
+
+define flow user get ai tools
+  $answer = execute get_ai_tool_info
+  bot $answer
