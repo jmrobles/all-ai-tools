@@ -4,6 +4,13 @@
 
 AI Tool is a Retrieval-Augmented Generation (RAG) system designed to provide information about AI tools based on user queries. It uses LlamaIndex for efficient indexing and retrieval, and pgvector for vector storage. The system offers a FastAPI-based API for document indexing and query processing, as well as a Telegram chatbot interface with Nvidia NeMo Guardrails for enhanced bot behavior. It leverages the OpenAI Agent from LlamaIndex for improved query processing and response generation.
 
+## Demo Video
+
+Want to see the AI Tool RAG System in action? Check out our demonstration video:
+
+[Watch the AI Tool RAG System Demo](https://www.youtube.com/watch?v=SjNkF_0I0V8)
+
+This video showcases the key features and functionality of our system, giving you a firsthand look at how it can help users discover and learn about AI tools.
 ## Try It Live!
 
 Want to see the AI Tool RAG System in action? You can interact with our live Telegram bot right now!
@@ -102,7 +109,14 @@ poetry install
 poetry run python -m spacy download en_core_web_lg
 ```
 
-5. Set up your PostgreSQL database with pgvector extension.
+5. Set up your PostgreSQL database with pgvector extension using the provided docker-compose.yml file:
+
+```bash
+docker-compose up -d
+```
+
+This will start a PostgreSQL database with the pgvector extension installed and ready to use.
+
 
 6. Configure your environment variables:
 
