@@ -8,9 +8,12 @@ AI Tool is a Retrieval-Augmented Generation (RAG) system designed to provide inf
 
 Want to see the AI Tool RAG System in action? Check out our demonstration video:
 
-[Watch the AI Tool RAG System Demo](https://www.youtube.com/watch?v=SjNkF_0I0V8)
+[![AI Tool RAG System Demo](https://img.youtube.com/vi/SjNkF_0I0V8/0.jpg)](https://www.youtube.com/watch?v=SjNkF_0I0V8 "AI Tool RAG System Demo")
 
 This video showcases the key features and functionality of our system, giving you a firsthand look at how it can help users discover and learn about AI tools.
+
+
+
 ## Try It Live!
 
 Want to see the AI Tool RAG System in action? You can interact with our live Telegram bot right now!
